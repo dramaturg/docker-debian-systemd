@@ -1,0 +1,18 @@
+
+Unattended-Upgrade::Origins-Pattern {
+	"o=${distro_id},n=${distro_codename}";
+	"o=${distro_id},n=${distro_codename}-updates";
+	"o=${distro_id},n=${distro_codename},l=Debian-Security";
+};
+
+Unattended-Upgrade::Package-Blacklist {
+//	"libc6";
+};
+
+Unattended-Upgrade::AutoFixInterruptedDpkg "true";
+Unattended-Upgrade::MinimalSteps "true";
+Unattended-Upgrade::Mail "root";
+Unattended-Upgrade::MailOnlyOnError "true";
+Unattended-Upgrade::Remove-Unused-Dependencies "true";
+Acquire::http::Dl-Limit "700";
+

@@ -1,0 +1,14 @@
+
+[Unit]
+Description=Dump the Docker environment variables
+
+[Service]
+Type=oneshot
+ExecStart=/root/configurator_dumpenv.sh
+TimeoutSec=0
+StandardOutput=tty
+RemainAfterExit=yes
+SysVStartPriority=99
+
+[Install]
+WantedBy=basic.target

@@ -1,0 +1,11 @@
+
+deb http://http.debian.net/debian jessie main contrib non-free
+deb http://http.debian.net/debian jessie-backports main contrib non-free
+deb http://http.debian.net/debian testing main contrib non-free
+
+deb http://security.debian.org/ jessie/updates main contrib non-free
+deb-src http://security.debian.org/ jessie/updates main contrib non-free
+
+deb [arch=amd64] http://repos.ds.ag/deb/ jessie main
+deb-src http://repos.ds.ag/deb/ jessie main
+

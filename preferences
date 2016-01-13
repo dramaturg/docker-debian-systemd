@@ -1,0 +1,41 @@
+
+# < 0      - Never install Package
+# 1:100    - Only install if not installed in any other version
+# 100:500  - Only install if there is not a newer version installed and there is
+#            no version in higher ranked distro
+# 500:990  - Install package if there is not a target release version or newer
+#            version already installed
+# 990:1000 - Always install if there is not a newer version of the package already installed
+# > 1000   - Always install. Even if it means to downgrade.
+
+
+Package: *
+Pin: release n=jessie
+Pin-Priority: 900
+
+Package: *
+Pin: release n=jessie-backports
+Pin-Priority: 900
+
+Package: *
+Pin: release n=jessie-updates
+Pin-Priority: 900
+
+
+Package: *
+Pin: release n=jessie-proposed-updates
+Pin-Priority: 700
+
+Package: *
+Pin: release a=stable
+Pin-Priority: 900
+
+
+Package: *
+Pin: release a=testing
+Pin-Priority: 400
+
+Package: *
+Pin: release a=unstable
+Pin-Priority: -10
+
