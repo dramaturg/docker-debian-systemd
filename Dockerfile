@@ -13,8 +13,7 @@ ADD preferences /etc/apt/preferences
 
 # clean out, update and install some base utilities
 #RUN apt-get -y remove exim4-base exim4-config
-RUN apt-key adv --keyserver hkp://pgpkeys.ds.ag:80 --recv-keys B4A5EC9C82268497 && \
-		apt-get -y update && apt-get -y upgrade && apt-get clean && \
+RUN apt-get -y update && apt-get -y upgrade && apt-get clean && \
 		apt-get -y install apt-utils lsb-release curl git cron at logrotate rsyslog \
 			unattended-upgrades ssmtp lsof procps \
 			initscripts libsystemd0 libudev1 systemd sysvinit-utils udev util-linux && \
@@ -31,7 +30,7 @@ ADD apt_periodic /etc/apt/apt.conf.d/02periodic
 
 
 RUN cd /lib/systemd/system/sysinit.target.wants/ && \
-		ls | grep -v systemd-tmpfiles-setup | xargs rm -f $1 && \
+		ls | grep -v systemd-tmpfiles-setup.service | xargs rm -f && \
 		rm -f /lib/systemd/system/sockets.target.wants/*udev* && \
 		systemctl mask -- \
 			tmp.mount \
@@ -48,7 +47,7 @@ RUN cd /lib/systemd/system/sysinit.target.wants/ && \
 			systemd-remount-fs.service \
 			systemd-update-utmp-runlevel.service \
 			systemd-logind.service && \
-		systemctl set-default multi-user.target
+		systemctl set-default multi-user.target || true
 
 # run stuff
 ADD configurator.sh configurator_dumpenv.sh /root/
