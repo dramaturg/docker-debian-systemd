@@ -43,11 +43,18 @@ RUN cd /lib/systemd/system/sysinit.target.wants/ && \
 			getty-static.service \
 			dev-mqueue.mount \
 			systemd-tmpfiles-setup-dev.service \
-			systemd-tmpfiles-setup.service \
 			systemd-remount-fs.service \
-			systemd-update-utmp-runlevel.service \
+			systemd-ask-password-wall.path \
 			systemd-logind.service && \
 		systemctl set-default multi-user.target || true
+
+RUN sed -ri /etc/systemd/journald.conf \
+			-e 's!^#?Storage=.*!Storage=volatile!'
+ADD container-boot.service /etc/systemd/system/container-boot.service
+RUN mkdir -p /etc/container-boot.d && \
+		systemctl enable container-boot.service
+
+
 
 # run stuff
 ADD configurator.sh configurator_dumpenv.sh /root/

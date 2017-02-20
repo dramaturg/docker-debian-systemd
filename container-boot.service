@@ -1,0 +1,13 @@
+[Unit]
+Description=Prepare container before starting services
+Before=basic.target
+After=sysinit.target
+DefaultDependencies=no
+
+[Service]
+ExecStart=/bin/run-parts -v --exit-on-error /etc/container-boot.d
+Type=oneshot
+RemainAfterExit=true
+
+[Install]
+WantedBy=basic.target
