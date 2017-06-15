@@ -16,8 +16,9 @@ ADD preferences /etc/apt/preferences
 RUN apt-get -y update && apt-get -y upgrade && apt-get clean && \
 		apt-get -y install apt-utils lsb-release curl git cron at logrotate rsyslog \
 			unattended-upgrades ssmtp lsof procps \
-			initscripts libsystemd0 libudev1 systemd sysvinit-utils udev util-linux && \
-		apt-get clean
+			initscripts libsystemd0 libudev1 systemd sysvinit-utils udev util-linux \
+			python sudo bash && \
+			apt-get clean
 
 # set random root password
 RUN P="$(dd if=/dev/random bs=1 count=8 2>/dev/null | base64)" ; echo $P && echo "root:$P" | chpasswd
