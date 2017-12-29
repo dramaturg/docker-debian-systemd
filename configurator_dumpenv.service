@@ -1,12 +1,14 @@
 
 [Unit]
 Description=Dump the Docker environment variables
+Requires=container-boot.service
+After=container-boot.service
 
 [Service]
 Type=oneshot
 ExecStart=/root/configurator_dumpenv.sh
 TimeoutSec=0
-StandardOutput=tty
+StandardOutput=inherit
 RemainAfterExit=yes
 
 [Install]

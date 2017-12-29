@@ -12,12 +12,12 @@ ADD sources.list /etc/apt/sources.list
 ADD preferences /etc/apt/preferences
 
 # clean out, update and install some base utilities
-#RUN apt-get -y remove exim4-base exim4-config
 RUN apt-get -y update && apt-get -y upgrade && apt-get clean && \
-		apt-get -y install apt-utils lsb-release curl git cron at logrotate rsyslog \
-			unattended-upgrades ssmtp lsof procps \
-			initscripts libsystemd0 libudev1 systemd sysvinit-utils udev util-linux && \
-		apt-get clean
+	apt-get -y install apt-utils lsb-release curl git cron at logrotate rsyslog \
+		unattended-upgrades ssmtp lsof procps \
+		initscripts libsystemd0 libudev1 systemd sysvinit-utils udev util-linux && \
+	apt-get clean && \
+	sed -i '/imklog/{s/^/#/}' /etc/rsyslog.conf
 
 # set random root password
 RUN P="$(dd if=/dev/random bs=1 count=8 2>/dev/null | base64)" ; echo $P && echo "root:$P" | chpasswd
@@ -42,6 +42,7 @@ RUN cd /lib/systemd/system/sysinit.target.wants/ && \
 			getty.target \
 			getty-static.service \
 			dev-mqueue.mount \
+			cgproxy.service \
 			systemd-tmpfiles-setup-dev.service \
 			systemd-remount-fs.service \
 			systemd-ask-password-wall.path \

@@ -8,9 +8,8 @@ After=configurator_dumpenv.service
 Type=oneshot
 ExecStart=/root/configurator.sh
 TimeoutSec=0
-StandardOutput=tty
+StandardOutput=inherit
 RemainAfterExit=yes
-SysVStartPriority=99
 
 [Install]
 WantedBy=basic.target
