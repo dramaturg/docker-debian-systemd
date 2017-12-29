@@ -10,20 +10,20 @@
 
 
 Package: *
-Pin: release n=jessie
+Pin: release n=stretch
 Pin-Priority: 900
 
 Package: *
-Pin: release n=jessie-backports
+Pin: release n=stretch-backports
 Pin-Priority: 900
 
 Package: *
-Pin: release n=jessie-updates
+Pin: release n=stretch-updates
 Pin-Priority: 900
 
 
 Package: *
-Pin: release n=jessie-proposed-updates
+Pin: release n=stretch-proposed-updates
 Pin-Priority: 700
 
 Package: *

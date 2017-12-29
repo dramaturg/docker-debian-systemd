@@ -1,5 +1,5 @@
 
-FROM debian:jessie
+FROM debian:stretch
 
 ENV DEBIAN_FRONTEND noninteractive
 ENV container docker
